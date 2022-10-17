@@ -5,36 +5,53 @@
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
               <h3 class="card-title text-left mb-3">Register</h3>
-              <form>
+              <form [formGroup]="formRegister" (ngSubmit)="crearUsuario()">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control p_input">
+                  <label>Nombre Completo</label>
+                  <input type="text" formControlName="nombre" class="form-control p_input">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control p_input">
+                  <input type="email" formControlName="email" class="form-control p_input">
                 </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" class="form-control p_input">
+                  <input type="password" formControlName="password" class="form-control p_input">
+                </div>
+                <div class="form-group">
+                  <label>RePassword</label>
+                  <input type="password" formControlName="password2" class="form-control p_input">
                 </div>
                 <div class="form-group d-flex align-items-center justify-content-between">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input"> Remember me </label>
+                      <input type="checkbox" formControlName="remember" class="form-check-input"> Remember me </label>
                   </div>
                   <a href="#" class="forgot-pass">Forgot password</a>
                 </div>
+
+                <!-- VALIDACIONES -->
+
+                <div class="row">
+                    <div class="col text-danger">
+                        <p *ngIf="campoNoValido('nombre')">El nombre es obligatorio, y debe ser un nombre completo entre 3 y 16 caracteres</p>
+                        <p *ngIf="campoNoValido('email')">El Mail es obligatorio, y debe respertar el formato mail</p>
+                        <p *ngIf="campoNoValido('password')">El Password es obligatorio entre 3 y 16 caracteres</p>
+                        <p *ngIf="campoNoValido('password2')">Reingrese el password</p>
+                        <p *ngIf="passCoindicen()">Los password deben coindicir</p>
+                    </div>
+                </div>
+
+
+
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                  <button type="submit" class="btn btn-primary btn-block enter-btn">Register</button>
                 </div>
                 <div class="d-flex">
-                  <button class="btn btn-facebook col mr-2">
-                    <i class="mdi mdi-facebook"></i> Facebook </button>
                   <button class="btn btn-google col">
-                    <i class="mdi mdi-google-plus"></i> Google plus </button>
+                    <i class="mdi mdi-google"></i> Google </button>
                 </div>
-                <p class="sign-up text-center">Already have an Account?<a href="#"> Sign Up</a></p>
+                <p class="sign-up text-center">Already have an Account?<a routerLink="/login"> Sign Up</a></p>
                 <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p>
               </form>
             </div>

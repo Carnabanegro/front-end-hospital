@@ -11,7 +11,7 @@ const routes: Routes = [
   // path: /dashboard routes from pagesRoutingModule
   // path: /auth routes from authRoutingModule
 
-
+  
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'error404', component:Error404Component},
   {path: '**', redirectTo: 'error404'},

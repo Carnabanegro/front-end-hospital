@@ -21,7 +21,9 @@ import { PagesComponent } from './pages/pages.component';
     AuthModule
   ],
   exports:[
-    PagesComponent
+    PagesComponent,
+    PagesModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
