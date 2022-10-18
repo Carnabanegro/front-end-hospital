@@ -7,11 +7,13 @@ import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { PagesComponent } from './pages/pages.component';
+import { ImagePipe } from './pipes/image.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagesComponent,
+    ImagePipe,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,71 @@
+<div class="row justify-content-center align-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+            <img class="card-img-top" alt="Card image cap" src="{{usuario.urlImages}}"/>
+          <h4 class="card-title">{{usuario.nombre}}</h4>
+          <p class="card-description"> {{usuario.role}} </p>
+          <form class="forms-sample" [formGroup]="formProfile" (ngSubmit)="modificar()">
+            <div class="form-group">
+              <label for="exampleInputUsername1">Full name</label>
+              <input type="text" class="form-control" formControlName="nombre" id="name" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control"  formControlName="email" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control"  formControlName="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputConfirmPassword1">Confirm Password</label>
+              <input type="password" class="form-control"  formControlName="password2" id="password2" placeholder="Password">
+            </div>
+
+            <!-- VALIDACIONES -->
+
+            <div class="row">
+                <div class="col text-danger">
+                    <p *ngIf="campoNoValido('nombre')">El nombre es obligatorio, y debe ser un nombre completo entre 3 y 16 caracteres</p>
+                    <p *ngIf="campoNoValido('email')">El Mail es obligatorio, y debe respertar el formato mail</p>
+                    <p *ngIf="campoNoValido('password')">El Password es obligatorio entre 3 y 16 caracteres</p>
+                    <p *ngIf="campoNoValido('password2')">Reingrese el password</p>
+                    <p *ngIf="passCoindicen()">Los password deben coindicir</p>
+                </div>
+            </div>
+
+            <button type="submit"  class="btn btn-primary mr-2">Submit</button>
+            <button class="btn btn-dark" routerLink="/">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 grid-margin ">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Avatar</h4>
+
+                <form class="forms-sample" [formGroup]="formAvatar" (ngSubmit)="uploadImage()">
+
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Cambia tu Avatar</label>
+                      <input type="file" class="form-control file-upload-info" formControlName="img" id="imagen" (change)="onFileChange($event)" placeholder="path de imagen">
+                    </div>
+                    <!-- VALIDACIONES -->
+                    <div class="row">
+                        <div class="col text-danger">
+                            <p *ngIf="imagenNoValido('img')">Elije una imagen</p>
+                           
+                        </div>
+                    </div>
+        
+                    <button type="submit"   class="btn btn-primary mr-2">Upload</button>
+
+                </form>
+              
+
+            
+        </div>
+    </div>
+</div>

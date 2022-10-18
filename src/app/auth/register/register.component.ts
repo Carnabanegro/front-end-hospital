@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { ValidatorsService } from '../../services/validators/validators.service';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class RegisterComponent {
     nombre: ['patricio serra',[Validators.required,Validators.minLength(3),Validators.maxLength(16),Validators.pattern(this.validatorService.nombreRegistroPattern)]],
     password: ['123456',[Validators.required,Validators.minLength(6),Validators.maxLength(16)]],
     password2: ['123456',[Validators.required,Validators.minLength(6),Validators.maxLength(16)]],
-    remember: [false,Validators.required],
+    remember: [false],
     email: ['@gmail.com',[Validators.required,Validators.pattern(this.validatorService.emailRegistroPattern)]]
   },{
     validators:[ this.validatorService.camposIguales('password','password2' ) ]
@@ -30,6 +30,10 @@ export class RegisterComponent {
   crearUsuario(){
 
     this.formSubmit = true;
+
+    if (this.formRegister.invalid){
+      return;
+    }
 
     this.userioService.crearUsuario(this.formRegister.value)
     .subscribe(

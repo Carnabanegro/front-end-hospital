@@ -7,6 +7,8 @@ import { Error404Component } from './error404/error404.component';
 import { Error505Component } from './error505/error505.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { ProfileComponent } from './profile/profile.component';
+import {ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +18,8 @@ import { AppRoutingModule } from '../app-routing.module';
     DoctorsComponent,
     UsersComponent,
     Error404Component,
-    Error505Component
+    Error505Component,
+    ProfileComponent
   ],
   exports:[
     HospitalsComponent,
@@ -29,6 +32,7 @@ import { AppRoutingModule } from '../app-routing.module';
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class PagesModule { }
