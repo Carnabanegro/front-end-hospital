@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {RegisterForm } from '../../interfaces/register-form.interface';
 import { environment } from 'src/environments/environment';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, delay, map, Observable, of, tap } from 'rxjs';
 import { LoginForm, LoginResponse } from '../../interfaces/login-form.interface';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
@@ -80,5 +80,27 @@ export class UsuarioService {
     })
   }
 
-  
+  getUsuarios(desde:number){
+    const token = localStorage.getItem('token') || '';
+    //decripto el token
+    return this.http.get(`${ base_url }/usuarios/`,{
+      headers: {
+        'x-token': token
+      },
+      params:{
+        desde: (desde*5).toString(),
+        cant:5
+      }
+    })
+    .pipe(
+      delay(1000),
+      map((resp:any) =>{
+        const usuarios = resp.usuarios.map((user:any) =>new Usuario(user.nombre,user.email,'undefined',user.role,user.google,user.uid,user.img))
+        return {
+          total:resp.total,
+          usuarios
+        }
+      })
+    )
+  }
 }
